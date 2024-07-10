@@ -17,7 +17,8 @@ struct ContentView: View {
             // pozivanje komponente/funkcije koja prikazuje karticu
             CardView(isFaceUp: true)
             CardView()
-            CardView()
+            CardView(isFaceUp: true)
+            CardView(isFaceUp: true)
         }
         // defaultna boja za HStack
         .foregroundStyle(.tint) // funkcija View Modifier sa argumentom
@@ -27,24 +28,35 @@ struct ContentView: View {
 
 // struktura CardView tipa View koja predstavlja karticu
 struct CardView: View {
-    // varijabla tipa Bool
-    var isFaceUp: Bool = false
+    // varijabla tipa Bool defaultne vrijednosti true
+    // @State omotac koristimo kada privremeno zelimo promijeniti stanje varijable,
+    // u ovom slucaju koristimo ga za okretanje kartice
+    @State var isFaceUp: Bool = true
     
     var body: some View {
         // View (grupira View-e u grupu od vrha prema dnu, slaze ih u stack)
         ZStack {
+            // lokalna varijabla tipa RoundedRectangle u ViewBuilderu
+            // RoundedRectangle View sa argumentom cornerRadius vrijednosti 12
+            let base = RoundedRectangle(cornerRadius: 12)
             // ako je isFaceUp true
             if isFaceUp {
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundStyle(.white)
-                // RoundedRedtangle View sa argumentom cornerRadius vrijednosti 12
-                RoundedRectangle(cornerRadius: 12)
-                    .strokeBorder(lineWidth: 2)
+                // bit ce aktivna bijela strana kartice
+                base.foregroundStyle(.white) // ili .fill(.white)
+                // tijelo kartice sa obrubom 12
+                base.strokeBorder(lineWidth: 2)
                 Text("🏋🏻‍♀️").font(.largeTitle) // Text View
             // ako je isFaceUp false
             } else {
-                RoundedRectangle(cornerRadius: 12)
+                base.fill()
             }
+        }
+        // funkcija onTapGesture
+        .onTapGesture {
+            // toogle funkcija za okretanje kartice(true/false)
+            isFaceUp.toggle()
+            // ispis u konzoli
+            print("tapped")
         }
     }
 }
