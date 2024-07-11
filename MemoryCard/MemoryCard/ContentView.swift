@@ -9,16 +9,21 @@ import SwiftUI
 
 // struktura imena ContentView tipa View
 struct ContentView: View {
+    // array slicica tipa String
+    let emoji: Array<String> = ["🏋🏻‍♀️", "⛹🏼‍♀️", "🏄🏾‍♀️", "🤽🏼", "🤾"]
     // varijabla imena body tipa some View
     // computed property(izracunava se svaki put ispocetka-pri koristenju)
     var body: some View {
         // View (grupira View-e u horizontalnu grupu side-to-side, slaze ih u stack)
         HStack {
-            // pozivanje komponente/funkcije koja prikazuje karticu
-            CardView(isFaceUp: true)
-            CardView()
-            CardView(isFaceUp: true)
-            CardView(isFaceUp: true)
+            // ForEach petlja kreira 4 kartice(4 Viewa)
+            // ViewBuilder sa argumentom index-kontrolna varijabla(counter)
+            // varijabla indices vraca range od arraya, key path id: \.self
+            ForEach(emoji.indices, id: \.self) { index in
+                // pozivanje komponente/funkcije koja prikazuje karticu
+                // preko indexa pristupamo vrijednosti u arrayu
+                CardView(content: emoji[index])
+            }
         }
         // defaultna boja za HStack
         .foregroundStyle(.tint) // funkcija View Modifier sa argumentom
@@ -28,6 +33,7 @@ struct ContentView: View {
 
 // struktura CardView tipa View koja predstavlja karticu
 struct CardView: View {
+    let content: String
     // varijabla tipa Bool defaultne vrijednosti true
     // @State omotac koristimo kada privremeno zelimo promijeniti stanje varijable,
     // u ovom slucaju koristimo ga za okretanje kartice
@@ -45,7 +51,7 @@ struct CardView: View {
                 base.foregroundStyle(.white) // ili .fill(.white)
                 // tijelo kartice sa obrubom 12
                 base.strokeBorder(lineWidth: 2)
-                Text("🏋🏻‍♀️").font(.largeTitle) // Text View
+                Text(content).font(.largeTitle) // Text View
             // ako je isFaceUp false
             } else {
                 base.fill()
