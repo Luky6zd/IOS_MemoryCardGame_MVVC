@@ -12,11 +12,13 @@ import SwiftUI
 @main
 // struktura tipa App
 struct MemoryCardApp: App {
+    // omotac propertya gdje se instancira observable object
+    @StateObject var game = EmojiMemoryGame()
     // computed property
     var body: some Scene {
         WindowGroup {
-            // pozivanje komponente/funkcije koja prikazuje ContentView
-            EmojiMemoryGameView()
+            // pozivanje komponente/funkcije koja prikazuje MemoryGame View
+            EmojiMemoryGameView(viewModel: game)
         }
     }
 }

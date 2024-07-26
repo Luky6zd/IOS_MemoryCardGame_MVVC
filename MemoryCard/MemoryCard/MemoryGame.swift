@@ -39,11 +39,18 @@ struct MemoryGame<CardContent> {
         
     }
     
+    // funkcija za mijesanje kartica
+    // mutating je kljucna rijec za funkciju koja modificira model
+    mutating func shuffle() {
+        cards.shuffle()
+        print(cards)
+    }
+    
     // definiranje kartice u Modelu
     // ugnjezdena struktura (MemoryGame.Card)
     struct Card {
         // definiranje defaultnih vrijednosti kartice
-        var isFaceUp: Bool = false
+        var isFaceUp: Bool = true
         var isMatched: Bool = false
         // varijabla tipa CardContent(emoji na kartici)
         let content: CardContent
