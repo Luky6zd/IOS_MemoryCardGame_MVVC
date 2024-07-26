@@ -7,84 +7,37 @@
 
 import SwiftUI
 
-// struktura imena ContentView tipa View
-struct ContentView: View {
+// View memory igre
+
+// struktura imena EmojiMemoryGameView tipa View
+// prikazuje View na EmojiMemoryGame ViewModel
+struct EmojiMemoryGameView: View {
+    // varijabla tipa EmojiMemoryGame
+    var viewModel: EmojiMemoryGame = EmojiMemoryGame()
     // array slicica tipa String
     let emoji: Array<String> = ["🏋🏻‍♀️", "⛹🏼‍♀️", "🏄🏾‍♀️", "🤽🏼", "🤾", "🚣🏼‍♀️", "🚵🏼‍♂️", "🤸🏽‍♂️", "🤼‍♀️", "🚴🏽‍♂️", "🏌🏿‍♂️", "⛷️"]
-    // varijabla tipa int sa defaultnim brojem kartica
-    @State var cardCount: Int = 4
     // varijabla imena body tipa some View
     // body prikazuje vertikalni stack kartica
     // computed property(izracunava se svaki put ispocetka-pri koristenju) i vraca View
     var body: some View {
-        // VStack View (grupira View-e u vertikalnu grupu)
-        VStack {
-            ScrollView {
-                // pozivanje komponente/funkcije
-                cards
-            }
-            // View za umetanje praznog prostora izmedu kartica i botuna
-            Spacer()
-            // pozivanje ikona/botuna add/remove
-            cardCountModifiers
+        // View u koji stavljamo kartice, kartice dobivaju scroll funkcionalnost
+        ScrollView {
+            // pozivanje komponente/funkcije
+            cards
         }
         // funkcija View Modifier za umetanje prostora u VStacku
         .padding()
-    }
-    
-    // kreiranje funkcija za modificiranje kartica, vraca some View
-    // 1.argument "by offset" ima 2 imena, 1.koristimo pri pozivanju funkcije, a 2.u kreiranju funkcije
-    func cardCountModifier(by offset: Int, symbol: String) -> some View {
-        // kreiranje botuna za dodavanje nove kartice, sa argumentom action
-        Button(action: {
-                // uvecavanje za broj offset koji definiramo pri pozivu funkcije
-                cardCount = cardCount + offset
-        // ViewBuilder label koji modificira View botuna
-        }, label: {
-            // ikonica add
-            Image(systemName: symbol)
-            //Text("Add")
-        })
-        // View Modifier za onesposobljavanje add i remove botuna sa uvijetima
-        // uvjet 1: remove ne moze ici ispod vrijednosti 1 ili
-        // uvjet 2: add ne moze ici preko vrijednosti definiranog broja kartica
-        .disabled(cardCount + offset < 1 || cardCount + offset > emoji.count  )
-    }
-    
-    // pozivanje funkcije za dodavanje kartice i spremanje u varijablu sto funkcija vrati
-    var cardAdder: some View {
-        cardCountModifier(by: +1, symbol: "rectangle.stack.fill.badge.plus")
-    }
-    
-    // pozivanje funkcije za brisanje kartice i spremanje u varijablu sto funkcija vrati
-    var cardRemover: some View {
-        cardCountModifier(by: -1, symbol: "rectangle.stack.fill.badge.minus")
-    }
-    
-    var cardCountModifiers: some View {
-        // HStack View (grupira View-e u horizontalnu grupu side-to-side, slaze ih u stack)
-        HStack {
-            // pozivanje komponente/funcije
-            cardRemover
-            // View za umetanje praznog prostora izmedu elemenata, gurne ih do kraja po horizontalnoj liniji
-            Spacer()
-            // pozivanje komponente/funcije
-            cardAdder
-        }
-        // ViewModifieri za povecavanje ikonica za cijeli HStack
-        .imageScale(.large)
-        .font(.largeTitle)
     }
     
     // varijabla/struktura tipa some View Layout koja prikazuje kartice
     var cards: some View {
         // struct/View koji kartice prikazuje u obliku grida
         // kao argument definiramo broj stupaca kao array GridItem-a
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85))]) {
             // ForEach petlja kreira 4 kartice(4 Viewa)
             // ViewBuilder sa argumentom index-kontrolna varijabla(counter)
             // varijabla indices vraca range od arraya, key path id: \.self
-            ForEach(0..<cardCount, id: \.self) { index in
+            ForEach(emoji.indices, id: \.self) { index in
                 // pozivanje komponente/funkcije koja prikazuje karticu
                 // preko indexa pristupamo vrijednosti u arrayu
                 CardView(content: emoji[index])
@@ -118,7 +71,7 @@ struct CardView: View {
                 base.foregroundStyle(.white) // ili .fill(.white)
                 // tijelo kartice sa obrubom 12
                 base.strokeBorder(lineWidth: 2)
-                Text(content).font(.largeTitle) // Text View
+                Text(content).font(Font.largeTitle) // Text View
             }
             // opacity View Modifier
             // ternary operator, ako je isFaceUp vidljiv : proziran
@@ -141,5 +94,5 @@ struct CardView: View {
 
 // struktura koja se prikazuje na canvasu(u Preview-u) kod ContentView-a
 #Preview {
-    ContentView()
+    EmojiMemoryGameView()
 }

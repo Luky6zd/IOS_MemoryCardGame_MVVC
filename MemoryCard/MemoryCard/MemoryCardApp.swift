@@ -16,7 +16,7 @@ struct MemoryCardApp: App {
     var body: some Scene {
         WindowGroup {
             // pozivanje komponente/funkcije koja prikazuje ContentView
-            ContentView()
+            EmojiMemoryGameView()
         }
     }
 }
