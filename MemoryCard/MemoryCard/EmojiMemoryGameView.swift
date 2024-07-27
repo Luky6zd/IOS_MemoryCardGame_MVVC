@@ -26,6 +26,8 @@ struct EmojiMemoryGameView: View {
             ScrollView {
                 // pozivanje komponente/funkcije
                 cards
+                    // ViewModifier za dodavanje animacije
+                    .animation(.default, value: viewModel.cards)
             }
             Button("Shuffle") {
                 // View/Botun poziva viewModel da mijesa kartice
@@ -41,15 +43,25 @@ struct EmojiMemoryGameView: View {
         // struct/View koji kartice prikazuje u obliku grida
         // kao argument definiramo broj stupaca kao array GridItem-a, te horizontalne i vertikalne razmake izmedu kartica
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)], spacing: 0) {
-            // ForEach petljom iteriramo kroz kartice i kreiramo ih
+            // ForEach petlja iterira kroz kartice i za svaku kreira novi View
             // ViewBuilder sa argumentom index-kontrolna varijabla(counter)
             // indices vraca range od arraya, key path id: \.self
-            ForEach(viewModel.cards.indices, id: \.self) { index in
-                // pozivanje komponente/funkcije koja prikazuje karticu
-                // preko indexa pristupamo vrijednosti u arrayu
-                CardView(viewModel.cards[index])
-                    .aspectRatio(2/3, contentMode: .fit)
-                    .padding(4)
+            ForEach(viewModel.cards) { card in
+                // razmak izmedu texta i kartice
+                //VStack(spacing: 0) {
+                    // pozivanje komponente/funkcije koja prikazuje karticu
+                    // preko indexa pristupamo vrijednosti u arrayu
+                    CardView(card)
+                        // ViewModifieri
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .padding(4)
+                        // biranje kartice preko Viewmodela
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
+                    // prikaz naziva id svake kartice
+                    //Text(card.id)
+                //}
             }
             // defaultna boja za HStack
             // funkcija View Modifier sa argumentom za setiranje boje
@@ -104,5 +116,6 @@ struct CardView: View {
 
 // struktura koja se prikazuje na canvasu(u Preview-u) kod ContentView-a
 #Preview {
+    // prikaz viewModela
     EmojiMemoryGameView(viewModel: EmojiMemoryGame())
 }
