@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// View memory igre
+// MARK: View memory igre
 
 // struktura imena EmojiMemoryGameView tipa View
 // prikazuje View na EmojiMemoryGame ViewModel
@@ -21,7 +21,29 @@ struct EmojiMemoryGameView: View {
     // body prikazuje vertikalni stack kartica
     // computed property(izracunava se svaki put ispocetka-pri koristenju) i vraca View
     var body: some View {
-        VStack {
+        // vertikalni stack View
+        VStack(alignment: .center) {
+            // horizontalni stack
+            HStack {
+                // naslov igre
+                Text("🏆")
+                    .font(.system(size: 50))
+                    //.background(Color("Powder"))
+                    .frame(width: 100, height: 100, alignment: .center)
+            
+                Spacer()
+                Text("Memory game")
+                    // View Modifieri
+                    .font(.system(size: 30))
+                    .foregroundStyle(Color("DarkLille"))
+                    .fontWeight(.heavy)
+                    .frame(width: 250, height: 70, alignment: .center)
+                    .background(Color("Powder"))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+               
+            Spacer()
+            }
+            //Divider()
             // View u koji stavljamo kartice, kartice dobivaju scroll funkcionalnost
             ScrollView {
                 // pozivanje komponente/funkcije
@@ -29,9 +51,23 @@ struct EmojiMemoryGameView: View {
                     // ViewModifier za dodavanje animacije
                     .animation(.default, value: viewModel.cards)
             }
-            Button("Shuffle") {
-                // View/Botun poziva viewModel da mijesa kartice
-                viewModel.shuffle()
+            // horizontalni stack View
+            HStack {
+                // botun za mijesanje kartica
+                Button("Shuffle") {
+                    // View/Botun poziva viewModel da mijesa kartice
+                    viewModel.shuffle()
+                }
+                // View Modifieri
+                .foregroundStyle(.white)
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.buttonBorder)
+                .font(.system(size: 20))
+                .padding(0)
+                .frame(width: 100, height: 50, alignment: .bottom)
+                .cornerRadius(10)
+                .fontWeight(.semibold)
+                .tint(Color("DarkLille"))
             }
         }
         // funkcija View Modifier za umetanje prostora u VStacku
@@ -63,9 +99,9 @@ struct EmojiMemoryGameView: View {
                     //Text(card.id)
                 //}
             }
-            // defaultna boja za HStack
+            // defaultna boja za HStack, u ovom slucaju boja pozadine kartice
             // funkcija View Modifier sa argumentom za setiranje boje
-            .foregroundStyle(.tint)
+            .foregroundStyle(Color("MediumLille"))
         }
     }
 }
@@ -85,7 +121,8 @@ struct CardView: View {
         ZStack {
             // lokalna varijabla tipa RoundedRectangle u ViewBuilderu
             // RoundedRectangle View sa argumentom cornerRadius vrijednosti 12
-            let base = RoundedRectangle(cornerRadius: 12)
+            // tijelo kartice faceUp
+            let base = RoundedRectangle(cornerRadius: 10)
             
             // View koji grupira skup elemenata u 1 grupu
             Group {
@@ -108,9 +145,12 @@ struct CardView: View {
             // tijelo kartice-pozadina kartice
             base.fill()
                 // modificiranje vidljivosti kartica sa opacity View Modifierom
-                // ternary operator, ako je isFaceUp proziran : vidljiv
+                // ternary operator, ako je kartica okrenuta isFaceUp, prozirna : vidljiva kartica
                 .opacity(card.isFaceUp ? 0 : 1)
         }
+        // View Modifier za modificiranje vidljivosti
+        // ako je kartica okrenuta faceUp ili je neodgovarajuca, vidljiva : prozirna kartica
+        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
     }
 }
 

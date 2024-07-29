@@ -4,10 +4,11 @@
 //
 //  Created by Lucrezia Odrljin on 22.07.2024.
 
+
 // importanje SwiftUI-a jer je ViewModel dio UI
 import SwiftUI
 
-// View Model memory igre
+// MARK: View Model memory igre
 
 // klasa jer ce EmojiMemoryGame biti share-ana/koristena u cijeloj memory igri
 // implementiran protokol za prikaz promjena u UI-u
@@ -17,7 +18,7 @@ class EmojiMemoryGame: ObservableObject {
     
     // privatna globalno dostupna funkcija koja kreira memory game, vraca MemoryGame Stringa sa brojem kartica
     private static func createMemoryGame() -> MemoryGame<String> {
-        return MemoryGame(numberOfCardPairs: 14) { pairIndex in
+        return MemoryGame(numberOfCardPairs: 12) { pairIndex in
             // zastita ViewModela da broj kartica ne izade iz dosega
             // ako su emoji u range-u i imaju pairIndex
             if emoji.indices.contains(pairIndex) {
