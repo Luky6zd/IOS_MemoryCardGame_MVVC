@@ -15,8 +15,8 @@ struct EmojiMemoryGameView: View {
     // varijabla tipa EmojiMemoryGame
     // markacija da je varijabla "promatrana" za promjene koje ce se izvrsiti
     @ObservedObject var viewModel: EmojiMemoryGame
-    // array slicica tipa String
-    let emoji: Array<String> = ["🏋🏻‍♀️", "⛹🏼‍♀️", "🏄🏾‍♀️", "🤽🏼", "🤾", "🚣🏼‍♀️", "🚵🏼‍♂️", "🤸🏽‍♂️", "🤼‍♀️", "🚴🏽‍♂️", "🏌🏿‍♂️", "⛷️"]
+    // varijabla aspect ratio tipa float
+    private let aspectRatio: CGFloat = 2/3
     // varijabla imena body tipa some View
     // body prikazuje vertikalni stack kartica
     // computed property(izracunava se svaki put ispocetka-pri koristenju) i vraca View
@@ -27,35 +27,33 @@ struct EmojiMemoryGameView: View {
             HStack {
                 // naslov igre
                 Text("🏆")
+                // View Modifieri
                     .font(.system(size: 50))
-                    //.background(Color("Powder"))
                     .frame(width: 100, height: 100, alignment: .center)
-            
                 Spacer()
                 Text("Memory game")
-                    // View Modifieri
+                // View Modifieri
                     .font(.system(size: 30))
                     .foregroundStyle(Color("DarkLille"))
                     .fontWeight(.heavy)
                     .frame(width: 250, height: 70, alignment: .center)
                     .background(Color("Powder"))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-               
-            Spacer()
+                Spacer()
             }
             //Divider()
             // View u koji stavljamo kartice, kartice dobivaju scroll funkcionalnost
             ScrollView {
                 // pozivanje komponente/funkcije
                 cards
-                    // ViewModifier za dodavanje animacije
+                // ViewModifier za dodavanje animacije
                     .animation(.default, value: viewModel.cards)
             }
             // horizontalni stack View
             HStack {
                 // botun za mijesanje kartica
                 Button("Shuffle") {
-                    // View/Botun poziva viewModel da mijesa kartice
+                    // View/Botun poziva viewModel da izmijesa kartice
                     viewModel.shuffle()
                 }
                 // View Modifieri
@@ -70,39 +68,27 @@ struct EmojiMemoryGameView: View {
                 .tint(Color("DarkLille"))
             }
         }
-        // funkcija View Modifier za umetanje prostora u VStacku
+        // umetanje prostora u VStacku
         .padding()
+        // boja pozadine
+        .background(Color("LightBrown"))
     }
-    
+
     // varijabla/struktura tipa some View Layout koja prikazuje kartice
-    var cards: some View {
-        // struct/View koji kartice prikazuje u obliku grida
-        // kao argument definiramo broj stupaca kao array GridItem-a, te horizontalne i vertikalne razmake izmedu kartica
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)], spacing: 0) {
-            // ForEach petlja iterira kroz kartice i za svaku kreira novi View
-            // ViewBuilder sa argumentom index-kontrolna varijabla(counter)
-            // indices vraca range od arraya, key path id: \.self
-            ForEach(viewModel.cards) { card in
-                // razmak izmedu texta i kartice
-                //VStack(spacing: 0) {
-                    // pozivanje komponente/funkcije koja prikazuje karticu
-                    // preko indexa pristupamo vrijednosti u arrayu
-                    CardView(card)
-                        // ViewModifieri
-                        .aspectRatio(2/3, contentMode: .fit)
-                        .padding(4)
-                        // biranje kartice preko Viewmodela
-                        .onTapGesture {
-                            viewModel.choose(card)
-                        }
-                    // prikaz naziva id svake kartice
-                    //Text(card.id)
-                //}
-            }
-            // defaultna boja za HStack, u ovom slucaju boja pozadine kartice
-            // funkcija View Modifier sa argumentom za setiranje boje
-            .foregroundStyle(Color("MediumLille"))
+    private var cards: some View {
+        // aspect vertical grid sa argumentima 
+        AspectVGrid(viewModel.cards, aspectRatio: aspectRatio) { card in
+            // pozivanje komponente/funkcije koja prikazuje karticu
+            CardView(card)
+            // ViewModifieri
+                .padding(4)
+            // biranje kartice preko Viewmodela
+                .onTapGesture {
+                    viewModel.choose(card)
+                }
         }
+        // funkcija View Modifier sa argumentom za setiranje boje pozadine kartice
+        .foregroundStyle(Color("MediumLille"))
     }
 }
 
