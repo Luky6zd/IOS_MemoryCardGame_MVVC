@@ -134,16 +134,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     // ugnjezdena struktura (MemoryGame.Card)
     // Card se ponasa po protokolima Equatable, Identifiable
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
-        // globalna funkcija tako da u cijeloj app mozemo koristiti ==
-        // argument left-hand-side je Card i right-hand-size je Card, vraca Bool da li su lijeva i desna strana kartice iste
-        static func == (lhs: Card, rhs: Card) -> Bool {
-            return lhs.isFaceUp == rhs.isFaceUp &&
-            lhs.isMatched == rhs.isMatched &&
-            lhs.content == rhs.content
-        }
-        
         // definiranje defaultnih vrijednosti kartice
-        var isFaceUp: Bool = false
+        var isFaceUp: Bool = true
         var isMatched: Bool = false
         // varijabla tipa CardContent(emoji na kartici)
         let content: CardContent
@@ -152,6 +144,13 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         // protokol za debug, za "ljepsi/cisci" ispis u konzoli
         var debugDescription: String {
             return "\(id): \(content) \(isFaceUp ? "up" : "down") \(isMatched ? "matched" : "")"
+        }
+        // globalna funkcija tako da u cijeloj app mozemo koristiti ==
+        // argument left-hand-side je Card i right-hand-size je Card, vraca Bool da li su lijeva i desna strana kartice iste
+        static func == (lhs: Card, rhs: Card) -> Bool {
+            return lhs.isFaceUp == rhs.isFaceUp &&
+            lhs.isMatched == rhs.isMatched &&
+            lhs.content == rhs.content
         }
     }
 }

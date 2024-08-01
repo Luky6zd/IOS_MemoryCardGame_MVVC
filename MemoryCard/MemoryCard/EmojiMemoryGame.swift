@@ -13,12 +13,14 @@ import SwiftUI
 // klasa jer ce EmojiMemoryGame biti share-ana/koristena u cijeloj memory igri
 // implementiran protokol za prikaz promjena u UI-u
 class EmojiMemoryGame: ObservableObject {
+    // alias kartice
+    typealias aCard =  MemoryGame<String>.Card
     // globalno dostupna privatna varijabla, ali setirana unutar klase
     private static let emoji = ["🏋🏻‍♀️", "⛹🏼‍♀️", "🏄🏾‍♀️", "🤽🏼", "🤾", "🚣🏼‍♀️", "🚵🏼‍♂️", "🤸🏽‍♂️", "🤼‍♀️", "🚴🏽‍♂️", "🏌🏿‍♂️", "⛷️"]
     
     // privatna globalno dostupna funkcija koja kreira memory game, vraca MemoryGame Stringa sa brojem kartica
     private static func createMemoryGame() -> MemoryGame<String> {
-        return MemoryGame(numberOfCardPairs: 12) { pairIndex in
+        return MemoryGame(numberOfCardPairs: 2) { pairIndex in
             // zastita ViewModela da broj kartica ne izade iz dosega
             // ako su emoji u range-u i imaju pairIndex
             if emoji.indices.contains(pairIndex) {
@@ -38,8 +40,13 @@ class EmojiMemoryGame: ObservableObject {
     // preko View Modela osiguravamo pristup varijabli card iz Modela
     // computed property, varijabla je tipa Array, MemoryGame koji je String
     // vraca Model kartica iz MemoryGame-a, da View "vidi" kartice
-    var cards: Array<MemoryGame<String>.Card> {
+    var cards: Array<aCard> {
         return model.cards
+    }
+    
+    // setiranje boje pozadine kartice
+    var color: Color {
+        return .mediumLille
     }
     
     // MARK: - Intents
@@ -52,7 +59,7 @@ class EmojiMemoryGame: ObservableObject {
     
     // intent funkcija gdje user ima namjeru izabrati neku od ponudenih kartica
     // funkcija da View "vidi" funkciju chooseCard iz Modela koji je privatan
-    func choose(_ card: MemoryGame<String>.Card) {
+    func choose(_ card: aCard) {
         // model poziva metodu chooseCard sa argumentom card
         model.chooseCard(card)
     }

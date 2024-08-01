@@ -60,7 +60,7 @@ struct AspectVGrid<Item: Identifiable, ItemView: View>: View {
             // izracun broja redova prema visini i sirini kartice
             let rowCount = (count / columnCount).rounded(.up)
             // ako je
-            if (rowCount * height) < (size.height * 55) {
+            if (rowCount * height) < size.height {
                 // vrati
                 return (size.width / columnCount).rounded(.down)
             }
