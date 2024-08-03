@@ -38,6 +38,7 @@ struct AspectVGrid<Item: Identifiable, ItemView: View>: View {
                 ForEach(items) { item in
                     // funkcija koja uzima item i vraca View
                     content(item)
+                        // sa vrijednoscu aspect ratio-a kartice i da fita u okvire LazyVGrida
                         .aspectRatio(aspectRatio, contentMode: .fit)
                 }
             }

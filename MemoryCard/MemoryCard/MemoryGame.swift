@@ -27,7 +27,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         // zastita da su na ekranu minimalno prikazane 2 kartice
         for pairIndex in 0..<max(2, numberOfCardPairs) {
             // varijabla content tipa cardContent i poziv funkcije cardContentFactory koja prima Int a vraca CardContent
-            let content = cardContentFactory(pairIndex)
+            let content: CardContent = cardContentFactory(pairIndex)
             // dodavanje 2 kartice u array pomocu funkcije append sa argumentima id i content
             // uparivanje kartica: 1a 1b, 2a 2b, 3a 3b
             cards.append(Card(content: content, id: "\(pairIndex+1) a"))
@@ -78,6 +78,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
     }
+    
     // MARK: GAME LOGIC
     // "promjenjiva" funkcija chooseCard pomocu koje modificiramo index broj kartice
     // s internim argumentom card tipa Card, bez externog argumenta
@@ -127,7 +128,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     // mutating je kljucna rijec za funkciju koja modificira model
     mutating func shuffle() {
         cards.shuffle()
-        print(cards)
+        //print(cards)
     }
     
     // definiranje kartice u Modelu
@@ -135,7 +136,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     // Card se ponasa po protokolima Equatable, Identifiable
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
         // definiranje defaultnih vrijednosti kartice
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         // varijabla tipa CardContent(emoji na kartici)
         let content: CardContent

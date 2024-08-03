@@ -22,8 +22,6 @@ struct CardView: View {
     }
     // definiranje konstantih vrijednosti View Modifiera
     private struct Constants {
-        static let cornerRadius: CGFloat = 10
-        static let lineWidth: CGFloat = 2
         // prostor izmedu kartica(padding)
         static let inset: CGFloat = 5
         static let color: Color = .white
@@ -42,52 +40,46 @@ struct CardView: View {
     }
     // funkcija body tipa some View
     var body: some View {
-        // View (grupira View-e u grupu od vrha prema dnu, slaze ih u stack)
-        ZStack {
-            // lokalna varijabla tipa RoundedRectangle u ViewBuilderu
-            // RoundedRectangle View sa argumentom cornerRadius vrijednosti 12
-            // tijelo kartice faceUp
-            let base = RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            
-            // View koji grupira skup elemenata u 1 grupu
-            Group {
-                // tijelo kartice-nalicje kartice
-                base.foregroundStyle(Constants.color) // ili .fill(.white)
-                // tijelo kartice sa obrubom 12
-                base.strokeBorder(lineWidth: Constants.lineWidth)
-                // setiranje kruga oko emojia
-                Pie(endAngle: .degrees(270))
-                    .opacity(Constants.Pie.opacity)
-                    // preklapanje teksta na vrhu kruga
-                    .overlay(
-                        // Text View, sadrzaj kartice
-                        Text(card.content)
-                            // najveca dopustena velicina emojia
-                            .font(.system(size: Constants.FontSize.largest))
-                            // najmanja dopustena velicina emojia
-                            .minimumScaleFactor(Constants.FontSize.scaleFactor)
-                            // viseredno centriranje teksta
-                            .multilineTextAlignment(.center)
-                            // aspect ratio texta 1:1
-                            .aspectRatio(1, contentMode: .fit)
-                            // prostor izmedu emojia i ruba kruga
-                            .padding(Constants.Pie.inset)
-                        )
-                        // prostor izmedu emojia i ruba kartice
-                        .padding(Constants.inset)
-            }
-            // opacity View Modifier
-            // ternary operator, ako je isFaceUp vidljiv : proziran
-            .opacity(card.isFaceUp ? 1 : 0)
-            // tijelo kartice-pozadina kartice
-            base.fill()
-                // modificiranje vidljivosti kartica sa opacity View Modifierom
-                // ternary operator, ako je kartica okrenuta isFaceUp, prozirna : vidljiva kartica
-                .opacity(card.isFaceUp ? 0 : 1)
-        }
-        // View Modifier za modificiranje vidljivosti
-        // ako je kartica okrenuta faceUp ili je neodgovarajuca, vidljiva : prozirna kartica
-        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+        // struktura Pie
+        Pie(endAngle: .degrees(270))
+            // View Modifieri
+            .opacity(Constants.Pie.opacity)
+            // preklapanje teksta na vrhu kruga
+            .overlay(
+                // Text View-sadrzaj kartice (slicica emojia)
+                Text(card.content)
+                    // najveca dopustena velicina emojia
+                    .font(.system(size: Constants.FontSize.largest))
+                    // najmanja dopustena velicina emojia
+                    .minimumScaleFactor(Constants.FontSize.scaleFactor)
+                    // viseredno centriranje teksta
+                    .multilineTextAlignment(.center)
+                    // aspect ratio texta 1:1
+                    .aspectRatio(1, contentMode: .fit)
+                    // prostor izmedu emojia i ruba kruga
+                    .padding(Constants.Pie.inset)
+                    // rotacija emojia u krug kad su 2 kartice pogodene
+                    .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+                    // duzina trajanja animacije-rotacije definirana u ekstenziji
+                    .animation(.spin(duration: 1), value: card.isMatched)
+            )
+            // prostor izmedu emojia i ruba kartice
+            .padding(Constants.inset)
+            // modificiranje sa Cardify modifierom
+            .cardify(isFaceUp: card.isFaceUp)
+            // View Modifier za modificiranje vidljivosti kartica
+            // ako je kartica okrenuta faceUp ili je neodgovarajuca, vidljiva : prozirna kartica
+            .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+    }
+}
+
+// custom made dodatak Animaciji
+// animation.spin
+extension Animation {
+    // definiranje spin funkcije sa agrumentom trajanja intervala spina
+    static func spin(duration: TimeInterval) -> Animation {
+        // vraca animaciju linearnog smjera i trajanja
+        return linear(duration: 1.2).repeatForever(autoreverses: false)
     }
 }
 

@@ -16,6 +16,7 @@
 		ADC1A7592C4E46CD00D60C40 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC1A7582C4E46CD00D60C40 /* EmojiMemoryGame.swift */; };
 		ADCDA21A2C4986D0002884D3 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCDA2192C4986D0002884D3 /* MemoryGame.swift */; };
 		ADEA454A2C5BB89400F2762F /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA45492C5BB89400F2762F /* Pie.swift */; };
+		ADEA454C2C5BFD0400F2762F /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEA454B2C5BFD0400F2762F /* Cardify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		ADC1A7582C4E46CD00D60C40 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		ADCDA2192C4986D0002884D3 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		ADEA45492C5BB89400F2762F /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		ADEA454B2C5BFD0400F2762F /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				AD188AAD2C3A84FF0080B518 /* MemoryCardApp.swift */,
 				AD188AAF2C3A84FF0080B518 /* EmojiMemoryGameView.swift */,
 				AD6CDCE92C5AE434004195FC /* CardView.swift */,
+				ADEA454B2C5BFD0400F2762F /* Cardify.swift */,
 				ADEA45492C5BB89400F2762F /* Pie.swift */,
 				ADBCC9922C5A67A600F1450C /* AspectVGrid.swift */,
 				ADCDA2192C4986D0002884D3 /* MemoryGame.swift */,
@@ -154,6 +157,7 @@
 			files = (
 				ADCDA21A2C4986D0002884D3 /* MemoryGame.swift in Sources */,
 				AD188AB02C3A84FF0080B518 /* EmojiMemoryGameView.swift in Sources */,
+				ADEA454C2C5BFD0400F2762F /* Cardify.swift in Sources */,
 				AD188AAE2C3A84FF0080B518 /* MemoryCardApp.swift in Sources */,
 				ADBCC9932C5A67A600F1450C /* AspectVGrid.swift in Sources */,
 				ADEA454A2C5BB89400F2762F /* Pie.swift in Sources */,

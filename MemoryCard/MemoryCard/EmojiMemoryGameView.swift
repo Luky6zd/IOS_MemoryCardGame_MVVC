@@ -50,15 +50,18 @@ struct EmojiMemoryGameView: View {
                     cards
                         // funkcija View Modifier sa argumentom za setiranje boje pozadine kartice preko View Modela
                         .foregroundStyle(viewModel.color)
-                        // ViewModifier za dodavanje animacije
-                        .animation(.default, value: viewModel.cards)
+                        // ViewModifier za dodavanje animacije karticama ka pritisnemo shuffle
+                        //.animation(.default, value: viewModel.cards)
             }
             // horizontalni stack View
             HStack {
                 // botun za mijesanje kartica
                 Button("Shuffle") {
-                    // View/Botun poziva viewModel da izmijesa kartice
-                    viewModel.shuffle()
+                    // poziv funkcije za mijesanje kartica sa animacijom
+                    withAnimation {
+                        // View/Botun poziva viewModel da izmijesa kartice
+                        viewModel.shuffle()
+                    }
                 }
                 // View Modifieri
                 .foregroundStyle(.white)
@@ -72,7 +75,7 @@ struct EmojiMemoryGameView: View {
                 .tint(Color("DarkLille"))
             }
         }
-        // umetanje prostora u VStacku
+        // umetanje prostora u VStacku, oko vanjskog ruba kartica
         .padding()
         // boja pozadine
         .background(Color("LightBrown"))
@@ -88,7 +91,11 @@ struct EmojiMemoryGameView: View {
                 .padding(spacing)
             // biranje kartice preko Viewmodela
                 .onTapGesture {
-                    viewModel.choose(card)
+                    // dodavanje animacije
+                    withAnimation(.easeInOut(duration: 2)) {
+                        // izbor kartice sa animacijom
+                        viewModel.choose(card)
+                    }
                 }
         }
     }

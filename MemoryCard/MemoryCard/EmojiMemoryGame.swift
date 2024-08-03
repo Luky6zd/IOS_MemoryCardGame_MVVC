@@ -18,7 +18,8 @@ class EmojiMemoryGame: ObservableObject {
     // globalno dostupna privatna varijabla, ali setirana unutar klase
     private static let emoji = ["🏋🏻‍♀️", "⛹🏼‍♀️", "🏄🏾‍♀️", "🤽🏼", "🤾", "🚣🏼‍♀️", "🚵🏼‍♂️", "🤸🏽‍♂️", "🤼‍♀️", "🚴🏽‍♂️", "🏌🏿‍♂️", "⛷️"]
     
-    // privatna globalno dostupna funkcija koja kreira memory game, vraca MemoryGame Stringa sa brojem kartica
+    // privatna globalno dostupna funkcija koja kreira memory game
+    // vraca MemoryGame Stringa sa brojem kartica
     private static func createMemoryGame() -> MemoryGame<String> {
         return MemoryGame(numberOfCardPairs: 2) { pairIndex in
             // zastita ViewModela da broj kartica ne izade iz dosega
@@ -26,7 +27,7 @@ class EmojiMemoryGame: ObservableObject {
             if emoji.indices.contains(pairIndex) {
                 // vrati emoji koji se nalazi na tom indexu
                 return emoji[pairIndex]
-                // ako su izvan range-a, vrati obavijest
+                // ako je broj kartica izvan range-a, vrati obavijest "!?"
             } else {
                 return "⁉️"
             }
