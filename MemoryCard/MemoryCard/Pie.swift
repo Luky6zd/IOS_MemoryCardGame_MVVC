@@ -9,7 +9,7 @@ import SwiftUI
 // importanje radi koristenja sinusa, kosinusa, radiana
 import CoreGraphics
 
-// MARK: Pie animation
+// MARK: Pie Animation
 
 // Pie struktura implementira Shape protokol
 struct Pie: Shape {
@@ -35,6 +35,7 @@ struct Pie: Shape {
             x: center.x + radius * cos(startAngle.radians),
             y: center.y + radius * sin(startAngle.radians)
         )
+        
         // definiranje putanje animacijskog kruga
         var path = Path()
         // definiranje smjera kretanja
@@ -53,6 +54,7 @@ struct Pie: Shape {
         // povratak linije
         path.addLine(to: center)
         
+        // vraca vrijednost putanje
         return path
     }
 }

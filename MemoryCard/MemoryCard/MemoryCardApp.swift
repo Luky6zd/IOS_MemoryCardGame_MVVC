@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-
-//main program
+// oznaka za main program
 @main
 // struktura tipa App
 struct MemoryCardApp: App {
     // omotac propertya gdje se instancira observable object
     @StateObject var game = EmojiMemoryGame()
+    
     // computed property
     var body: some Scene {
         WindowGroup {

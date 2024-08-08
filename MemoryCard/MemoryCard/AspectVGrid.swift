@@ -20,7 +20,7 @@ struct AspectVGrid<Item: Identifiable, ItemView: View>: View {
     // inicijalizacija aspectVgrida
     // items su tipa array Item, aspect ratio je tipa flaot, content je funkcija koja uzima Item i vraca ItemView
     init(_ items: [Item], aspectRatio: CGFloat, @ViewBuilder content: @escaping (Item) -> ItemView) {
-        // items iz strukture = items iz inita
+        // pridjeljivanje vrijednosti, items iz strukture = items iz inita
         self.items = items
         self.aspectRatio = aspectRatio
         self.content = content
@@ -33,10 +33,10 @@ struct AspectVGrid<Item: Identifiable, ItemView: View>: View {
             let gridItemSize = gridItemWidthThatFits(count: items.count, size: geometry.size, atAspectRatio: 2/3)
             // struct/View koji kartice prikazuje u obliku grida
             // kao argument definiramo broj stupaca kao array GridItem-a, te horizontalne i vertikalne razmake izmedu kartica
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: gridItemSize), spacing: 0)], spacing: 0) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: gridItemSize), spacing: 2)], spacing: 3) {
                 // ForEach petlja iterira kroz kartice i za svaku kreira novi View
                 ForEach(items) { item in
-                    // funkcija koja uzima item i vraca View
+                    // funkcija uzima item i vraca View
                     content(item)
                         // sa vrijednoscu aspect ratio-a kartice i da fita u okvire LazyVGrida
                         .aspectRatio(aspectRatio, contentMode: .fit)

@@ -5,10 +5,9 @@
 //  Created by Lucrezia Odrljin on 22.07.2024.
 
 
-// importanje SwiftUI-a jer je ViewModel dio UI
 import SwiftUI
 
-// MARK: View Model memory igre
+// MARK: View Model
 
 // klasa jer ce EmojiMemoryGame biti share-ana/koristena u cijeloj memory igri
 // implementiran protokol za prikaz promjena u UI-u
@@ -21,20 +20,22 @@ class EmojiMemoryGame: ObservableObject {
     // privatna globalno dostupna funkcija koja kreira memory game
     // vraca MemoryGame Stringa sa brojem kartica
     private static func createMemoryGame() -> MemoryGame<String> {
-        return MemoryGame(numberOfCardPairs: 2) { pairIndex in
+        return MemoryGame(numberOfCardPairs: 12) { pairIndex in
             // zastita ViewModela da broj kartica ne izade iz dosega
             // ako su emoji u range-u i imaju pairIndex
             if emoji.indices.contains(pairIndex) {
                 // vrati emoji koji se nalazi na tom indexu
                 return emoji[pairIndex]
-                // ako je broj kartica izvan range-a, vrati obavijest "!?"
+                // ako je broj kartica izvan range-a
             } else {
+                //  vrati emoji obavijest "!?"
                 return "⁉️"
             }
         }
     }
     
-    // privatna varijabla model tipa MemoryGame, koji je generic tipa String, pohranjuje sto vrati funkcija createMemoryGame
+    // privatna varijabla model tipa MemoryGame, koji je generic tipa String,
+    // pohranjuje sto vrati funkcija createMemoryGame
     // markacija published oznacava da se na toj varijabli izvrsavaju promjene
     @Published private var model = createMemoryGame()
     
@@ -45,9 +46,15 @@ class EmojiMemoryGame: ObservableObject {
         return model.cards
     }
     
-    // setiranje boje pozadine kartice
+    // setiranje boje pozadine kartice preko View Modela
     var color: Color {
         return .mediumLille
+    }
+    
+    // varijabla za izracun rezultata tipa int, computed property
+    var score: Int {
+        // vraca rezultat od modela(memory igre)
+        return model.score
     }
     
     // MARK: - Intents
