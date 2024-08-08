@@ -42,6 +42,7 @@ struct EmojiMemoryGameView: View {
                 Spacer()
                 // pozivanje/umetanje komponente
                 gameTitle
+                // umetanje praznog prostora od ruba naslova do ruba Viewa
                 Spacer()
             }
             // Divider()
@@ -86,10 +87,10 @@ struct EmojiMemoryGameView: View {
         Text("Memory game")
             // View Modifieri
             .font(.system(size: 30))
-            .foregroundStyle(Color("DarkLille"))
+            .foregroundStyle(.darkLille)
             .fontWeight(.heavy)
             .frame(width: 250, height: 70, alignment: .center)
-            .background(Color("Powder"))
+            .background(.powder)
             .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     
