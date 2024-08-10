@@ -2,7 +2,7 @@ PROJECT DESCRIPTION
 
 Memory card game is created in XCode 15.4 using SwiftUI and Swift Foundation.
 
-It's created in Mode-View-ViewModel (MVVM) pattern.
+It's created in Model-View-ViewModel (MVVM) pattern.
 
 Game rule is to match 2 identical cards with the same emoji image. 
 
