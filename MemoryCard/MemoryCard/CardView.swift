@@ -2,7 +2,7 @@
 //  CardView.swift
 //  MemoryCard
 //
-//  Created by Luky on 31.07.2024.
+//  Created by Lucrezia Odrljin on 31.07.2024.
 
 
 import SwiftUI

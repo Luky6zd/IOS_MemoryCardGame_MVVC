@@ -50,6 +50,7 @@
 			isa = PBXGroup;
 			children = (
 				AD188AAC2C3A84FF0080B518 /* MemoryCard */,
+				AD188AB32C3A85010080B518 /* Preview Content */,
 				AD188AAB2C3A84FF0080B518 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,7 +76,6 @@
 				ADCDA2192C4986D0002884D3 /* MemoryGame.swift */,
 				ADC1A7582C4E46CD00D60C40 /* EmojiMemoryGame.swift */,
 				AD188AB12C3A85010080B518 /* Assets.xcassets */,
-				AD188AB32C3A85010080B518 /* Preview Content */,
 			);
 			path = MemoryCard;
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MemoryCard/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Q2YGZDDW89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -328,7 +328,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MemoryCard/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Q2YGZDDW89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

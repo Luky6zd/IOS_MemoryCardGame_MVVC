@@ -2,7 +2,7 @@
 //  FlyingNumber.swift
 //  MemoryCard
 //
-//  Created by Luky on 03.08.2024.
+//  Created by Lucrezia Odrljin on 03.08.2024.
 
 
 import SwiftUI

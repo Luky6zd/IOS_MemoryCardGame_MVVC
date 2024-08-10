@@ -2,7 +2,7 @@
 //  Cardify.swift
 //  MemoryCard
 //
-//  Created by Luky on 01.08.2024.
+//  Created by Lucrezia Odrljin on 01.08.2024.
 
 
 import SwiftUI
