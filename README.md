@@ -1,12 +1,12 @@
 PROJECT DESCRIPTION
 
-Memory card game is created in Mode-View-ViewModel (MVVM) pattern.
+Memory card game is created in XCode 15.4 using SwiftUI and Swift Foundation.
 
-Game rule is to match 2 cards with the same image. 
+It's created in Mode-View-ViewModel (MVVM) pattern.
 
-Cards uses emojis for images or content on their body.
+Game rule is to match 2 identical cards with the same emoji image. 
 
-Dealing, fliping and chosing the cards have special animations.
+Dealing, flipping and chosing the cards have special animations.
 
 Player collects points for matching 2 identical cards, and gets extra bonus points for matching them in within 6 seconds (faster he picks the cards, more bonus points he gets).
 
