@@ -4,11 +4,11 @@ Memory card game is created in XCode 15.4 using SwiftUI and Swift Foundation.
 
 It's created in Model-View-ViewModel (MVVM) pattern.
 
-Game rule is to match 2 identical cards with the same emoji image. 
+Main objective of the game is to match 2 identical cards with the same emoji picture. 
 
 Dealing, flipping and chosing the cards have special animations.
 
-Player collects points for matching 2 identical cards, and gets extra bonus points for matching them in within 6 seconds (faster he picks the cards, more bonus points he gets).
+Player collects points for matching 2 identical cards, and gets bonus points for matching them in within 6 seconds (faster he picks the cards, more bonus points he gets).
 
 <img width="1512" alt="Memory_1" src="https://github.com/user-attachments/assets/48903195-fabd-42cf-b576-7e25840575df">
 <img width="374" alt="Memora_2" src="https://github.com/user-attachments/assets/4b1dc2ad-bd80-4a57-baef-4babf7347d42">
